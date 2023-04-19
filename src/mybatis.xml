@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--开启驼峰命名自动转换-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <typeAliases>
+        <!--单独指定某个类的别名-->
+        <typeAlias type="com.xuhai.entity.Brand" alias="bd"/>
+        <!--指定包路径，统一设置该路径内的所有实体类的别名为它的类名首字母小写-->
+        <package name="com.xuhai.entity"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/car?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;charsetEncoding=utf-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="1234"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/xuhai/mapper/BrandMapper.xml"/>
+        <mapper resource="com/xuhai/mapper/UserinfoMapper.xml"/>
+        <mapper resource="com/xuhai/mapper/DepartmentMapper.xml"/>
+<!--        <package name="com/xuhai/mapper"/>-->
+    </mappers>
+</configuration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace是mybatis的命名空间属性，要求全局(整个项目)唯一-->
+<mapper namespace="nsBrand">
+    <select id="getAll" resultType="com.xuhai.entity.Brand">
+        select * from brand
+    </select>
+    <!--#{}表示占位符，当传递的参数为基本数据类型时，参数名可以为任意值-->
+    <select id="getById" parameterType="int" resultType="bd">
+        select * from brand where id = #{abcde}
+    </select>
+    <!--${}表示字符串拼接-->
+    <!--当传递的参数为引用数据类型时，不能直接传递，需要把他封装到一个对象中来使用-->
+    <select id="getAll2" parameterType="bd" resultType="bd">
+        select * from brand where brand_name like '%${brandName}%'
+    </select>
+
+    <!--resultMap的功能非常非常非常强大，不仅仅用于改变属性名和列名不同的作用-->
+    <resultMap id="brandMap" type="com.xuhai.entity.Brand">
+        <result property="brandName" column="brand_name"/>
+    </resultMap>
+
+    <select id="getAll3" parameterType="bd" resultMap="brandMap">
+        select * from brand where brand_name like concat('%',#{brandName},'%')
+    </select>
+</mapper>
